@@ -233,7 +233,7 @@ QString Utils::Misc::userFriendlyDuration(const qlonglong seconds, const qlonglo
 
     if (seconds < 60)
     {
-        if (resolution == TimeResolution::Minutes)
+        if (resolution == TimeResolution::Seconds)
             return QCoreApplication::translate("misc", "< 1m", "< 1 minute");
 
         return QCoreApplication::translate("misc", "%1s", "e.g: 10 seconds").arg(QString::number(seconds));
