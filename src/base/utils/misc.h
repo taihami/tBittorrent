@@ -82,7 +82,7 @@ namespace Utils::Misc
 
     // Take a number of seconds and return a user-friendly
     // time duration like "1d 2h 10m".
-    QString userFriendlyDuration(qlonglong seconds, qlonglong maxCap = -1, TimeResolution resolution = TimeResolution::Minutes);
+    QString userFriendlyDuration(qlonglong seconds, qlonglong maxCap = -1, TimeResolution resolution = TimeResolution::Seconds);
 
     QString languageToLocalizedString(QStringView localeStr);
 }
