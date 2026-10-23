@@ -231,17 +231,26 @@ QString Utils::Misc::userFriendlyDuration(const qlonglong seconds, const qlonglo
     if (seconds == 0)
         return u"0"_s;
 
-    if (seconds < 60)
+        if (seconds < 60)
     {
-        if (resolution == TimeResolution::Seconds)
-            return QCoreApplication::translate("misc", "< 1m", "< 1 minute ");
+        if (resolution == TimeResolution::Minutes)
+            return QCoreApplication::translate("misc", "< 1m", "< 1 minute");
 
         return QCoreApplication::translate("misc", "%1s", "e.g: 10 seconds").arg(QString::number(seconds));
     }
 
     qlonglong minutes = (seconds / 60);
     if (minutes < 60)
-        return QCoreApplication::translate("misc", "%1m %2s", "e.g: 10 minutes").arg(QString::number(minutes));
+    {
+        if (resolution == TimeResolution::Seconds)
+        {
+            const qlonglong secs = seconds - (minutes * 60);
+            return QCoreApplication::translate("misc", "%1m %2s", "e.g: 10 minutes 5 seconds")
+                    .arg(QString::number(minutes), QString::number(secs));
+        }
+
+        return QCoreApplication::translate("misc", "%1m", "e.g: 10 minutes").arg(QString::number(minutes));
+    }
 
     qlonglong hours = (minutes / 60);
     if (hours < 24)
